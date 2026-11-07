@@ -1,165 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajesh G - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rajesh  | Portfolio</title>
+<meta name="description" content="Rajesh G, Computer Science Engineering student building software and AI projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--fg:#f2f2f2;--mut:#8a8a8a;--red:#e10600;--line:#1c1c1c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,sans-serif;scroll-behavior:smooth}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--red);color:#fff}
+ul,ol{list-style:none}
+.wrap{max-width:880px;margin:0 auto;padding:40px 24px 80px}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.mark{font-weight:800;letter-spacing:1px}
+nav a{margin-left:20px;color:var(--mut);font-size:14px;transition:color .2s}
+nav a:hover{color:var(--red)}
+.hero{padding:100px 0 80px}
+.kicker{color:var(--mut);font-size:14px;margin-bottom:18px}
+h1{font-size:clamp(48px,9vw,96px);font-weight:800;letter-spacing:-2px;line-height:1;transition:color .25s}
+.intro{margin-top:28px;font-size:18px;color:var(--mut);max-width:620px;line-height:1.7}
+.quote{margin-top:40px;padding-left:16px;border-left:2px solid var(--red);font-size:17px;font-style:italic;max-width:620px}
+section{margin-bottom:96px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--red);margin-bottom:24px;font-weight:600}
+.hl{transition:color .25s,transform .35s}
+.hl:hover{color:var(--red)}
+/* Personal info */
+.info{display:grid;grid-template-columns:1fr 1fr;gap:20px 40px}
+.info div span{display:block;color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+.info div b{font-weight:500;font-size:15px}
+.info a{font-weight:500;font-size:15px;transition:color .25s}
+.info a:hover{color:var(--red)}
+/* Objective / What I do */
+.objective{color:var(--mut);font-size:17px;line-height:1.8;max-width:680px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:10px;padding:24px;transition:border-color .25s}
+.card:hover{border-color:var(--red)}
+.card h3{font-size:16px;font-weight:600;margin-bottom:10px}
+.card p{color:var(--mut);font-size:14px;line-height:1.7}
+/* Education */
+.edu{display:grid;grid-template-columns:120px 1fr;gap:6px 20px;padding:20px 0;border-top:1px solid var(--line)}
+.edu:last-child{border-bottom:1px solid var(--line)}
+.edu .yr{color:var(--mut);font-size:14px}
+.edu h3{font-size:16px;font-weight:600;width:fit-content}
+.edu p{color:var(--mut);font-size:14px;margin-top:4px}
+/* Skills */
+.skill-group{margin-bottom:28px}
+.skill-group h3{font-size:15px;font-weight:600;margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:14px;border:1px solid var(--line);padding:7px 12px;border-radius:6px;transition:border-color .2s,color .2s}
+.tags span{position:relative}
+.tags span[data-tip]:hover{border-color:var(--red);color:var(--red)}
+.tags span[data-tip]::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px);width:max-content;max-width:240px;background:var(--red);color:#fff;font-size:13px;line-height:1.5;padding:9px 12px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:10;white-space:normal;text-align:left}
+.tags span[data-tip]:hover::after{opacity:1;transform:translate(-50%,0)}
+/* Projects accordion */
+.item{border-top:1px solid var(--line)}
+.item:last-child{border-bottom:1px solid var(--line)}
+.head{width:100%;display:flex;align-items:center;gap:20px;padding:22px 0;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.num{color:var(--mut);font-size:14px;width:28px;font-variant-numeric:tabular-nums}
+.name{flex:1;font-size:20px;font-weight:600;transition:color .25s,transform .35s}
+.plus{font-size:24px;color:var(--red);transition:transform .35s;width:20px;text-align:center}
+.head:hover .name{color:var(--red);transform:translateX(6px)}
+.item.open .plus{transform:rotate(45deg)}
+.panel{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.panel-in{padding:0 0 26px 48px;color:var(--mut);line-height:1.7;max-width:680px}
+.panel-in p{margin-bottom:16px;font-size:15px}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.stack span{font-size:13px;color:var(--fg);border:1px solid var(--line);padding:5px 10px;border-radius:6px}
+.go{color:var(--red);font-weight:600;font-size:14px;border-bottom:1px solid transparent;transition:border-color .2s}
+.go:hover{border-color:var(--red)}
+/* Experience */
+.exp h3{font-size:18px;font-weight:600;width:fit-content}
+.exp .meta{color:var(--mut);font-size:14px;margin:6px 0 14px}
+.exp ul{color:var(--mut);font-size:15px;line-height:1.8;padding-left:18px;list-style:disc}
+.connect{display:flex;gap:28px;align-items:center;flex-wrap:wrap;font-size:18px;font-weight:600}
+.connect span{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+.connect a:hover{color:var(--red)}
+.fade{opacity:0;transform:translateY(24px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
+.d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}
+@keyframes up{to{opacity:1;transform:none}}
+@media (max-width:700px){
+  .hero{padding:80px 0 60px}
+  .intro{font-size:16px}
+  .cards{grid-template-columns:1fr}
+  .info{grid-template-columns:1fr}
+  .edu{grid-template-columns:1fr}
+  .panel-in{padding-left:0}
+  nav a{margin-left:12px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.fade{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <span class="logo-text">Rajesh<span class="logo-accent">.</span></span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="resume.html" class="nav-link">Resume</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+<div class="wrap">
+  <header class="top">
+    <span class="mark hl">RAJ</span>
+    <nav><a href="#info">Info</a><a href="#objective">Objective</a><a href="#education">Education</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    Hello, I'm <span class="gradient-text">Rajesh G</span>
-                </h1>
-                <p class="hero-subtitle">Computer Science Engineering Student</p>
-                <p class="hero-description">
-                    I'm a dedicated CSE student who loves learning new technologies and building creative digital solutions. My goal is to strengthen my skills in coding and AI to develop projects that make a real-world difference.
-                </p>
-                <div class="hero-buttons">
-                    <a href="resume.html" class="btn btn-primary">View Resume</a>
-                    <a href="contact.html" class="btn btn-secondary">Get In Touch</a>
-                </div>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/rajesh-g-004972327/" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/Rajeshkumar80" target="_blank" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:rajesh752791@gmail.com" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-wrapper">
-                    <div class="image-placeholder">
-                        <!-- Replace this div with your photo -->
-                        <img src="profile.jpg" alt="Rajesh G" class="profile-photo">
-                    </div>
-                    <div class="floating-card card-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                        </svg>
-                        <span>Code</span>
-                    </div>
-                    <div class="floating-card card-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 16v-4"></path>
-                            <path d="M12 8h.01"></path>
-                        </svg>
-                        <span>AI</span>
-                    </div>
-                    <div class="floating-card card-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 20V10"></path>
-                            <path d="M12 20V4"></path>
-                            <path d="M6 20v-6"></path>
-                        </svg>
-                        <span>Data</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="hero">
+    <p class="kicker fade">Computer Science Engineering Student</p>
+    <h1 id="name" class="fade d1 hl big">Rajesh</h1>
+    <p class="intro fade d2">I'm a dedicated CSE student who loves learning new technologies and building creative digital solutions. My goal is to strengthen my skills in coding and AI to develop projects that make a real-world difference.</p>
+    <blockquote class="quote fade d3">"There is a one percent chance, and sometimes that chance is good enough."</blockquote>
+  </section>
 
-    <!-- Quote Section -->
-    <section class="quote-section">
-        <div class="container">
-            <blockquote class="quote">
-                <p>"Even if the chances are 1%, keep fighting."</p>
-            </blockquote>
-        </div>
-    </section>
+  <section id="info">
+    <h2 class="hl">Personal Information</h2>
+    <div class="info">
+      <div><span>Full Name</span><b>Rajesh G</b></div>
+      <div><span>Email</span><a href="mailto:rajesh752791@gmail.com">rajesh752791@gmail.com</a></div>
+      <div><span>Phone</span><b>8073439040</b></div>
+      <div><span>Location</span><b>Hoskote, Bengaluru Rural - 562114, Karnataka</b></div>
+      <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/rajesh-g-004972327/" target="_blank" rel="noopener">linkedin.com/in/rajesh-g</a></div>
+      <div><span>GitHub</span><a href="https://github.com/Rajeshkumar80" target="_blank" rel="noopener">github.com/Rajeshkumar80</a></div>
+    </div>
+  </section>
 
-    <!-- Highlights Section -->
-    <section class="highlights">
-        <div class="container">
-            <h2 class="section-title">What I Do</h2>
-            <div class="highlights-grid">
-                <div class="highlight-card">
-                    <div class="highlight-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                            <line x1="8" y1="21" x2="16" y2="21"></line>
-                            <line x1="12" y1="17" x2="12" y2="21"></line>
-                        </svg>
-                    </div>
-                    <h3>Web Development</h3>
-                    <p>Building responsive and interactive web applications using modern technologies and frameworks.</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
-                            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
-                            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg>
-                    </div>
-                   <h3>Software Development</h3>
-                    <p>Learning and building simple software projects to improve my coding skills and understand how real applications work.</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 6v6l4 2"></path>
-                        </svg>
-                    </div>
-                    <h3>AI & Innovation</h3>
-                    <p>Exploring artificial intelligence and machine learning to create innovative solutions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="objective">
+    <h2 class="hl">Career Objective</h2>
+    <p class="objective">To grow as a skilled software developer and use technology to solve real-world problems efficiently. I am passionate about learning new technologies and building innovative solutions that create meaningful impact.</p>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2024 Rajesh G. All rights reserved.</p>
-                <p class="footer-location">Hoskote, Bengaluru Rural - 562114, Karnataka</p>
-            </div>
-        </div>
-    </footer>
+  <section>
+    <h2 class="hl">What I Do</h2>
+    <div class="cards">
+      <div class="card"><h3 class="hl">Web Development</h3><p>Building responsive and interactive web applications using modern technologies and frameworks.</p></div>
+      <div class="card"><h3 class="hl">Software Development</h3><p>Learning and building simple software projects to improve my coding skills and understand how real applications work.</p></div>
+      <div class="card"><h3 class="hl">AI &amp; Innovation</h3><p>Exploring artificial intelligence and machine learning to create innovative solutions.</p></div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <section id="education">
+    <h2 class="hl">Education</h2>
+    <div class="edu">
+      <div class="yr">2024 &ndash; 2027</div>
+      <div><h3 class="hl">Bachelor of Engineering (B.E.), Computer Science and Engineering</h3><p>Gopalan College of Engineering and Management, Bengaluru</p></div>
+    </div>
+    <div class="edu">
+      <div class="yr">2021 &ndash; 2024</div>
+      <div><h3 class="hl">Diploma in Computer Science and Engineering</h3><p>Government Polytechnic, Immadihalli</p></div>
+    </div>
+    <div class="edu">
+      <div class="yr">2021</div>
+      <div><h3 class="hl">SSLC (Secondary School Leaving Certificate)</h3><p>Citizens High School, Hoskote</p></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="hl">Skills</h2>
+    <div class="skill-group">
+      <h3 class="hl">Technical</h3>
+      <div class="tags"><span data-tip="Markup language for structuring web pages.">HTML</span><span data-tip="Stylesheet language for layout and visual design.">CSS</span><span data-tip="Language that makes web pages interactive.">JavaScript</span><span data-tip="CSS framework for responsive, ready-made layouts.">Bootstrap</span><span data-tip="Server-side language for building web applications.">PHP</span><span data-tip="Relational database for storing application data.">MySQL</span><span data-tip="JavaScript library for drawing charts.">Chart.js</span><span data-tip="General-purpose language for scripting, data, and AI.">Python</span><span data-tip="JavaScript runtime for running code on the server.">Node.js</span></div>
+    </div>
+    <div class="skill-group">
+      <h3 class="hl">Tools &amp; Frameworks</h3>
+      <div class="tags"><span data-tip="Code editor by Microsoft with extensions for many languages.">VS Code</span><span data-tip="Version control for tracking code changes, and hosting for shared code.">Git &amp; GitHub</span><span data-tip="Design tool for creating UI mockups and prototypes.">Figma</span><span data-tip="Automation server for building and deploying code.">Jenkins</span><span data-tip="Tool for tracking issues and managing project work.">Jira</span><span data-tip="Visual board for organizing tasks.">Trello</span><span data-tip="Local server bundle, with a web interface for MySQL databases.">XAMPP/phpMyAdmin</span><span data-tip="Tools for drawing software design diagrams.">UML Tools</span><span data-tip="Online tool for quick graphic design.">Canva</span><span data-tip="AI language models used for writing, learning, and coding help.">ChatGPT &amp; LLMs</span></div>
+    </div>
+    <div class="skill-group">
+      <h3 class="hl">Soft Skills</h3>
+      <div class="tags"><span data-tip="Guiding a team toward a shared goal.">Leadership</span><span data-tip="Breaking hard problems into smaller steps.">Problem-Solving</span><span data-tip="Working well with others toward shared results.">Teamwork</span><span data-tip="Planning tasks to meet deadlines.">Time Management</span><span data-tip="Adjusting quickly to new tools and changes.">Adaptability</span></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="hl">Projects</h2>
+    <ol id="list"></ol>
+  </section>
+
+  <section id="experience" class="exp">
+    <h2 class="hl">Work Experience</h2>
+    <h3 class="hl">Cloud Project Developer Intern</h3>
+    <p class="meta">IT Desk &middot; 6 Months</p>
+    <ul>
+      <li>Developed secure encryption mechanisms using Diffie-Hellman Key Exchange</li>
+      <li>Integrated cloud services for scalable data storage and transmission</li>
+      <li>Collaborated with team members on full-stack development</li>
+      <li>Implemented security best practices for data protection</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2 class="hl">Get In Touch</h2>
+    <p class="objective">Let's discuss your project or just say hello.</p>
+    <div class="info" style="margin-top:28px">
+      <div><span>Email</span><a href="mailto:rajesh752791@gmail.com">rajesh752791@gmail.com</a></div>
+      <div><span>Phone</span><a href="tel:+918073439040">8073439040</a></div>
+      <div><span>Location</span><b>Hoskote, Bengaluru Rural, Karnataka - 562114</b></div>
+    </div>
+    <p class="objective" style="margin-top:36px">Feel free to reach out through any of the channels above. I'm always open to new projects, creative ideas, or opportunities.</p>
+    <div class="connect" style="margin-top:28px">
+      <span>Connect With Me</span>
+      <a class="hl" href="https://www.linkedin.com/in/rajesh-g-004972327/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="hl" href="https://github.com/Rajeshkumar80" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  const el = document.getElementById('name');
+  const final = el.textContent;
+  const chars = '!<>-_/[]{}=+*^?#';
+  let f = 0;
+  const t = setInterval(() => {
+    el.textContent = final.split('').map((c, i) => c === ' ' ? ' ' : (i < f / 2 ? c : chars[Math.floor(Math.random() * chars.length)])).join('');
+    if (++f > 24) { el.textContent = final; clearInterval(t); }
+  }, 40);
+})();
+
+const P = [
+  { t: 'Cloud-Based Encryption System', d: 'Secure file encryption using Diffie-Hellman key exchange, integrated with cloud storage for safe transmission and sharing.', g: ['Python', 'JavaScript', 'Cloud'], u: 'https://github.com/Rajeshkumar80/secure-text-transfer' },
+  { t: 'AI Interview Preparation Portal', d: 'AI-powered platform for practicing technical interviews, with question generation, evaluation, and feedback.', g: ['PHP', 'MySQL', 'AI APIs'], u: 'https://github.com/Rajeshkumar80/ai-interviewer' },
+  { t: 'Sorting Algorithm Visualizer', d: 'Interactive visualization of Bubble Sort, Selection Sort, and Merge Sort.', g: ['HTML', 'CSS', 'JavaScript'], u: 'https://github.com/Rajeshkumar80/sorting-visulization' },
+  { t: 'AES Encryption Over TCP', d: 'Python-based AES encryption and decryption for secure data transfer over TCP sockets, through a command-line interface.', g: ['Python', 'TCP', 'AES'], u: 'https://github.com/Rajeshkumar80' },
+  { t: 'Adaptlearn', d: 'Adaptive learning platform project.', g: [], u: 'https://github.com/Rajeshkumar80/Adaptlearn' },
+  { t: 'FleetLedger', d: 'Fleet management project.', g: [], u: 'https://github.com/Rajeshkumar80/FleetLedger' },
+  { t: 'Spring CRUD Application', d: 'CRUD application built with Spring Boot.', g: ['Java', 'Spring Boot'], u: 'https://github.com/Rajeshkumar80/SpringCrudApplication' },
+  { t: 'AI Planner', d: 'AI-based planning tool project.', g: [], u: 'https://github.com/Rajeshkumar80/AI-planner-' },
+  { t: 'AI Personal Knowledge Assistant', d: 'AI assistant for organizing personal notes and knowledge.', g: [], u: 'https://github.com/Rajeshkumar80/ai-personal-knowledge-assistant' }
+];
+const list = document.getElementById('list');
+list.innerHTML = P.map((p, i) => `
+  <li class="item">
+    <button class="head" aria-expanded="false">
+      <span class="num">${String(i + 1).padStart(2, '0')}</span>
+      <span class="name">${p.t}</span>
+      <span class="plus">+</span>
+    </button>
+    <div class="panel"><div class="panel-in">
+      <p>${p.d}</p>
+      ${p.g.length ? `<div class="stack">${p.g.map(x => `<span>${x}</span>`).join('')}</div>` : ''}
+      <a class="go" href="${p.u}" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+    </div></div>
+  </li>`).join('');
+
+function closeItem(item) {
+  item.classList.remove('open');
+  item.querySelector('.head').setAttribute('aria-expanded', 'false');
+  item.querySelector('.panel').style.maxHeight = '0';
+}
+function openItem(item) {
+  item.classList.add('open');
+  item.querySelector('.head').setAttribute('aria-expanded', 'true');
+  const panel = item.querySelector('.panel');
+  panel.style.maxHeight = panel.scrollHeight + 'px';
+}
+list.addEventListener('click', e => {
+  const btn = e.target.closest('.head');
+  if (!btn) return;
+  const item = btn.parentElement;
+  const willOpen = !item.classList.contains('open');
+  list.querySelectorAll('.item.open').forEach(closeItem);
+  if (willOpen) openItem(item);
+});
+</script>
 </body>
 </html>
